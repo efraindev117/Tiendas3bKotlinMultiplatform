@@ -1,0 +1,96 @@
+package com.tienda3b.app.core.database.model.cats
+
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.tienda3b.app.core.model.CatsUiModelItem
+
+@Entity(tableName = "cats")
+data class CatsEntity(
+    @Embedded(prefix = "weight_")
+    val weight: CatsWeightEntity,
+    @PrimaryKey val id: String,
+    val name: String,
+    val temperament: String,
+    val origin: String,
+    val country_codes: String,
+    val country_code: String,
+    val description: String,
+    val life_span: String,
+    val indoor: Int,
+    val alt_names: String,
+    val adaptability: Int,
+    val affection_level: Int,
+    val child_friendly: Int,
+    val dog_friendly: Int,
+    val energy_level: Int,
+    val grooming: Int,
+    val health_issues: Int,
+    val intelligence: Int,
+    val shedding_level: Int,
+    val social_needs: Int,
+    val stranger_friendly: Int,
+    val vocalisation: Int,
+    val experimental: Int,
+    val hairless: Int,
+    val natural: Int,
+    val rare: Int,
+    val rex: Int,
+    val suppressed_tail: Int,
+    val short_legs: Int,
+    val wikipedia_url: String,
+    val hypoallergenic: Int,
+    val reference_image_id: String,
+    @Embedded(prefix = "image_")
+    val image: CatsImageEntity,
+    val cfa_url: String,
+    val vcahospitals_url: String,
+    val lap: Int,
+    val cat_friendly: Int,
+    val bidability: Int,
+    val vetstreet_url: String
+)
+
+fun CatsEntity.toUi(): CatsUiModelItem =
+    CatsUiModelItem(
+        weight = weight.toDomain(),
+        id = id,
+        name = name,
+        temperament = temperament.orEmpty(),
+        origin = origin.orEmpty(),
+        country_codes = country_codes.orEmpty(),
+        country_code  = country_code.orEmpty(),
+        description   = description.orEmpty(),
+        life_span     = life_span.orEmpty(),
+        indoor        = indoor,
+        alt_names     = alt_names.orEmpty(),
+        adaptability      = adaptability ?: 0,
+        affection_level   = affection_level ?: 0,
+        child_friendly    = child_friendly ?: 0,
+        dog_friendly      = dog_friendly ?: 0,
+        energy_level      = energy_level ?: 0,
+        grooming          = grooming ?: 0,
+        health_issues     = health_issues ?: 0,
+        intelligence      = intelligence ?: 0,
+        shedding_level    = shedding_level ?: 0,
+        social_needs      = social_needs ?: 0,
+        stranger_friendly = stranger_friendly ?: 0,
+        vocalisation      = vocalisation ?: 0,
+        experimental      = experimental ?: 0,
+        hairless          = hairless ?: 0,
+        natural           = natural ?: 0,
+        rare              = rare,
+        rex               = rex,
+        suppressed_tail   = suppressed_tail,
+        short_legs        = short_legs,
+        wikipedia_url     = wikipedia_url.orEmpty(),
+        hypoallergenic    = 0,
+        reference_image_id = reference_image_id.orEmpty(),
+        image = image.toDomain(),
+        cfa_url          = "",
+        vcahospitals_url = "",
+        lap              = 0,
+        cat_friendly     = 0,
+        bidability       = 0,
+        vetstreet_url    = ""
+    )
